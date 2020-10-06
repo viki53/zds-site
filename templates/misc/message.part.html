@@ -27,6 +27,7 @@
 {% endifchanged %}
 
 <article
+    id="p{{ message.id }}"
     class="topic-message
            {% if message.is_useful and not message_is_hidden %}helpful{% endif %}
            {% if perms_change and message.is_potential_spam and not message_is_hidden %}potential-spam{% endif %}
@@ -159,7 +160,7 @@
                 <span itemprop="name">{{ message.author.username }}</span>
             </a>
 
-            <a href="#p{{ message.pk }}" id="p{{ message.id }}" class="date" title="{{ message.pubdate|tooltip_date|capfirst }}">
+            <a href="#p{{ message.pk }}" class="date" title="{{ message.pubdate|tooltip_date|capfirst }}">
                 <time itemprop="dateCreated" datetime="{{ message.pubdate|date:"c" }}">
                     <span class="long-date">
                         {{ message.pubdate|format_date|capfirst }}
