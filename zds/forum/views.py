@@ -9,7 +9,7 @@ from django.core.exceptions import PermissionDenied
 from django.urls import reverse
 from django.db import transaction
 from django.http import Http404, HttpResponse, StreamingHttpResponse
-from django.shortcuts import redirect, get_object_or_404, render, render_to_response
+from django.shortcuts import redirect, get_object_or_404, render
 from django.template.loader import render_to_string
 from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
@@ -57,7 +57,7 @@ class ForumCategoryForumsDetailView(DetailView):
         return context
 
 
-class LastTopicsViewTests(ListView):
+class LastTopicsListView(ListView):
 
     context_object_name = 'topics'
     template_name = 'forum/last_topics.html'
@@ -74,6 +74,15 @@ class LastTopicsViewTests(ListView):
             .filter(forum__in=user_readable_forums(self.request.user)) \
             .order_by(query_order)[:settings.ZDS_APP['forum']['topics_per_page']]
         return topics
+
+    def get_context_data(self, **kwargs):
+        context = super(LastTopicsListView, self).get_context_data(**kwargs)
+
+        context.update({
+            'topic_read': TopicRead.objects.list_read_topic_pk(self.request.user, context['topics'])
+        })
+
+        return context
 
 
 class ForumTopicsListView(FilterMixin, ForumEditMixin, ZdSPagingListView, UpdateView, SingleObjectMixin):
@@ -248,7 +257,7 @@ class TopicNew(CreateView, SingleObjectMixin):
 
         if 'preview' in request.POST:
             if request.is_ajax():
-                content = render_to_response('misc/preview.part.html', {'text': request.POST['text']})
+                content = render(request, 'misc/preview.part.html', {'text': request.POST['text']})
                 return StreamingHttpResponse(content)
             else:
                 initial = {
@@ -327,7 +336,7 @@ class TopicEdit(UpdateView, SingleObjectMixin, TopicEditMixin, FeatureableMixin)
 
             if 'preview' in request.POST:
                 if request.is_ajax():
-                    content = render_to_response('misc/preview.part.html', {'text': request.POST['text']})
+                    content = render(request, 'misc/preview.part.html', {'text': request.POST['text']})
                     return StreamingHttpResponse(content)
                 else:
                     form = self.create_form(self.form_class, **{
@@ -593,7 +602,7 @@ class PostEdit(UpdateView, SinglePostObjectMixin, PostEditMixin):
 
             if 'preview' in request.POST:
                 if request.is_ajax():
-                    content = render_to_response('misc/preview.part.html', {'text': request.POST.get('text')})
+                    content = render(request, 'misc/preview.part.html', {'text': request.POST.get('text')})
                     return StreamingHttpResponse(content)
                 else:
                     form = self.create_form(self.form_class, **{
