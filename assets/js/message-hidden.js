@@ -7,6 +7,26 @@
 (function($) {
   'use strict'
 
+  // Remove hash in URL when clicking outside :target hidden message
+  $(document).click(function(event) {
+    const hash = location.hash.substr(1)
+    if (!hash) {
+      return
+    }
+
+    const target = event.target
+    const anchor = document.querySelector('.topic-message.hidden:target')
+
+    if (!anchor) {
+      return
+    }
+    if (anchor === target || anchor.contains(target)) {
+      return
+    }
+
+    history.pushState('', document.title, location.pathname + location.search)
+  })
+
   function hidemsg() {
     let $msg = $(this).next()
     do {
