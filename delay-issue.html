@@ -172,16 +172,22 @@
 <h2>J’ai des lenteurs avec gulp (build|watch)<a class="headerlink" href="#j-ai-des-lenteurs-avec-gulp-build-watch" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Pour le développement et uniquement ce but, notre script <cite>gulp</cite> prend en entrée un paramètre <code class="docutils literal notranslate"><span class="pre">--speed</span></code> qui désactive les optimisations du code pour la prod. Ainsi <code class="docutils literal notranslate"><span class="pre">watch</span></code> a besoin de calculer moins de choses donc utilise moins de CPU.</p>
 <p>Avec gulp il faudra faire :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ npm run watch -- --speed
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$ yarn run watch --speed
 </pre></div>
 </div>
+<p>Si vous utilisez <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run</span></code> pour lancer le site, cette configuration est utilisée par défaut.</p>
 </div>
 <div class="section" id="le-changement-de-page-est-tres-lent">
 <h2>Le changement de page est très lent !<a class="headerlink" href="#le-changement-de-page-est-tres-lent" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Désactiver la barre de debug réduit la vitesse de chargement par 10. Si vous n’utilisez pas la <code class="docutils literal notranslate"><span class="pre">DEBUG_TOOLBAR_CONFIG</span></code>, vous pouvez la désactiver avec la configuration <code class="docutils literal notranslate"><span class="pre">dev_fast</span></code>:</p>
+<p>Désactiver la barre de debug réduit la vitesse de chargement par 10. Si vous n’utilisez pas la <code class="docutils literal notranslate"><span class="pre">DEBUG_TOOLBAR_CONFIG</span></code>, vous pouvez la désactiver avec la configuration <code class="docutils literal notranslate"><span class="pre">dev_fast</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python manage.py runserver --settings zds.settings.dev_fast
 </pre></div>
 </div>
+<p>Si vous utilisez <code class="docutils literal notranslate"><span class="pre">make</span></code> pour lancer le site, il est encore plus simple d’activer ce mode :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make run-fast
+</pre></div>
+</div>
+<p>Attention, cela activera aussi le cache côté client des fichiers statiques, ce qui veut dire que les fichiers JS et CSS ne seront pas actualisés sans un rafraîchissement de force (<code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">F5</span></code> ou similaire).</p>
 </div>
 </div>
 
@@ -204,7 +210,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2014-2020, Zeste de Savoir
+        &copy; Copyright 2014-2021, Zeste de Savoir
 
     </p>
   </div>

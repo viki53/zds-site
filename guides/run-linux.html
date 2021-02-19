@@ -202,11 +202,15 @@
 <div class="section" id="lancer-le-serveur">
 <h2>Lancer le serveur<a class="headerlink" href="#lancer-le-serveur" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Il suffit tout simplement d’écrire :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make run-back
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make run
 </pre></div>
 </div>
 <p>Ensuite, ouvrez votre navigateur et aller au choix sur <a class="reference external" href="http://localhost:8000">http://localhost:8000</a> ou <a class="reference external" href="http://127.0.0.1:8000">http://127.0.0.1:8000</a>.</p>
-<p>Vous pouvez vous connecter avec le membre <code class="docutils literal notranslate"><span class="pre">user</span></code>, le membre <code class="docutils literal notranslate"><span class="pre">staff</span></code> ou n’importe quel autre membre présent sur <a class="reference external" href="http://localhost:8000/membres/">http://localhost:8000/membres/</a>, le mot de passe est identique au pseudo.</p>
+<p>Vous pouvez vous connecter avec le membre <code class="docutils literal notranslate"><span class="pre">user</span></code>, le membre <code class="docutils literal notranslate"><span class="pre">staff</span></code> ou n’importe quel autre membre présent sur <a class="reference external" href="http://localhost:8000/membres/">http://localhost:8000/membres/</a> ; le mot de passe est toujours identique au pseudo.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Par défaut, le serveur de développement met en cache dans le navigateur tous les fichiers statiques, sauf les <code class="docutils literal notranslate"><span class="pre">.js</span></code> et les <code class="docutils literal notranslate"><span class="pre">.css</span></code>. Si vous voulez accélérer votre instance locale en mettant le plus de choses possible en cache et en désactivant les outils de développement un peu lourds (à savoir, la <em>debug toolbar</em>), vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">run-fast</span></code>. Attention qu’alors, pour avoir la dernière version des fichiers CSS et JS, il vous faudra actualiser de force (<code class="docutils literal notranslate"><span class="pre">Ctrl+F5</span></code> ou similaire).</p>
+</div>
 </div>
 <div class="section" id="s-amuser">
 <h2>S’amuser<a class="headerlink" href="#s-amuser" title="Lien permanent vers ce titre">¶</a></h2>
@@ -239,7 +243,7 @@
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2014-2020, Zeste de Savoir
+        &copy; Copyright 2014-2021, Zeste de Savoir
 
     </p>
   </div>
